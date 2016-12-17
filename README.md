@@ -4,5 +4,7 @@
 Lobbying Portal
 
 **Requirements:**
-PyMoney
-DjMoney
+- Python 2.7
+- PyMoney
+- DjMoney
+- Django-static-precompiler (during development)
