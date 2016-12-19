@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'lobbying', # Application Files
     'bootstrap3', # http://django-bootstrap3.readthedocs.io/en/latest/
     'static_precompiler',
+    'polling',
 ]
 
 MIDDLEWARE_CLASSES = [
