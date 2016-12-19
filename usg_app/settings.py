@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize', # Numeric Formatting https://docs.djangoproject.com/en/dev/ref/contrib/humanize/#ref-contrib-humanize
-    'jquery', # https://pypi.python.org/pypi/django-jquery/3.1.0
     'djmoney', # https://github.com/django-money/django-money
     'lobbying', # Application Files
     'bootstrap3', # http://django-bootstrap3.readthedocs.io/en/latest/
