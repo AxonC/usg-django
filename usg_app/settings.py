@@ -133,6 +133,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'static_precompiler.finders.StaticPrecompilerFinder',
 )
-STATIC_ROOT = os.path.join(BASE_DIR, 'lobbying/static_root/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root/')
 
 STATICFILES_DIRS = ('usg_app/static/',)
