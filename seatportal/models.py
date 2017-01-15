@@ -30,4 +30,6 @@ class StateDemographics(models.Model):
     demographic_c = models.DecimalField("conservative Demographic", decimal_places=1, max_digits=3)
     class Meta:
         verbose_name_plural = "State Demographics"
+    def __str__(self):
+        return self.state
     
