@@ -3,7 +3,7 @@ from .models import SenateSeat, StateDemographics
 
 class SenateSeatAdmin(admin.ModelAdmin):
     list_display = ('state', 'sclass', 'party', 'user', 'vacant')
-    ordering = ['state']
+    ordering = ('state', 'sclass')
     
 class DemographicsAdmin(admin.ModelAdmin):
     list_display = ('state', 'demographic_p', 'demographic_m', 'demographic_c')
