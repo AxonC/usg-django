@@ -1,0 +1,64 @@
+{% extends 'seatportal/basefiles.html'%}
+
+<head>
+  {% block dependencies %}
+  {% endblock %}
+</head>
+
+{% block content %}
+<h1 class="text-xs-center">USG Senate Seat Portal</h1>
+<div class="container">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 col-md-8 text-xs-center">
+      <p class="btn-group text-xs-center">
+        <input type="button" class="btn btn-danger" id="republican" value="Republican Seats"></input>
+        <input type="button" class="btn btn-info" id="normal" value="Full List"></input>
+        <input type="button" class="btn btn-primary" id="democratic" value="Democratic Seats"></input>
+      </p><br/>
+      <p class="btn-group text-xs-center">
+        <input type="button" class="btn btn-default" id="vacant" value="Vacant"></input>
+        <button type="button" class="btn btn-default" value="USG Home"><a href="http://usgovsim.net/PRC/" style="color: #000;">USG Home</a></button>
+      </p>
+      <div class="panel panel-default">
+        {% if count == True %}
+        <p>
+          <h4>Republican Seats: <small>{{ cgop }}</small> Democratic Seats: <small>{{ cdem }}</small>  Independent Seats: <small>{{ cind }}</small></h4>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="table">
+      <table class="table table-striped table-hover">
+        <thead class="inverse">
+            <th>State:</th>
+            <th>Class:</th>
+            <th>Party:</th>
+            <th>Holder:</th>
+            <th>PROG:</th>
+            <th>MODR:</th>
+            <th>CONS:</th>
+        </thead>
+        <tbody>
+          {% for seat in s %}
+          <tr>
+              <td>{{ seat.get_state_display }} ({{ seat.state }})</td>
+              <td>{{ seat.sclass }}</td>
+              <td class="{% if seat.party == "D" %} dem {% elif seat.party == "R" %} rep {% elif seat.party == "C-IND" %} cind {% elif seat.party = "P-IND"%} pind {% endif %}">{{ seat.get_party_display}}</td>
+              <td>{{ seat.user }}</td>
+              {% for dem in demos %}
+              {% if dem.state == seat.state %}
+              <td class="prog-demo">{{ dem.demographic_p }}</td>
+              <td class="modr-demo">{{ dem.demographic_m }}</td>
+              <td class="cons-demo">{{ dem.demographic_c}}</td>
+              {% endif %}
+              {% endfor %}
+          </tr>
+          {% endfor %}
+            
+        </tbody>
+        </table>
+      </div>
+</div>
+
+{% endblock %}
