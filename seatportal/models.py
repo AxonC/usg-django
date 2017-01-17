@@ -19,7 +19,7 @@ class SenateSeat(models.Model):
     )
     sclass = models.IntegerField("class of Seat", choices=SEAT_CLASS)
     user = models.CharField("username of Player", max_length=30, null=True, blank=True)
-    vacant = models.BooleanField("Is the Seat Vacant?", default=0)
+    vacant = models.BooleanField("Is the Seat Vacant?", default=False)
     class Meta:
         verbose_name_plural = "Seats"
     
