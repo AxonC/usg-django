@@ -1,7 +1,7 @@
 # **USG Django Application**
 
 **Current Features:**
-Lobbying Portal, Seatporal and Polling Tracker
+Lobbying Portal, Seatportal and Polling Tracker
 
 **Requirements:**
 - Python 2.7
