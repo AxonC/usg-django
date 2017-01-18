@@ -19,10 +19,12 @@
         <input type="button" class="btn btn-default" id="vacant" value="Vacant"></input>
         <button type="button" class="btn btn-default" value="USG Home"><a href="http://usgovsim.net/PRC/" style="color: #000;">USG Home</a></button>
       </p>
-      <div class="panel panel-default">
+      <div class="card">
         {% if count == True %}
         <p>
-          <h4>Republican Seats: <small>{{ cgop }}</small> Democratic Seats: <small>{{ cdem }}</small>  Independent Seats: <small>{{ cind }}</small></h4>
+          <h2>Summary:</h2>
+          <h5>Republican Seats: <small>{{ cgop }}</small><br/> Democratic Seats: <small>{{ cdem }}</small>  <br/>Independent Seats: <small>{{ cind }}</small></h5>
+          <h5>Vacant Seats: <small>{{ cvac }}</small></h5>
         </p>
         {% endif %}
       </div>
