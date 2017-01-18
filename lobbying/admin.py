@@ -10,4 +10,4 @@ class OrganisationAdmin(admin.ModelAdmin):
     
 admin.site.register(Donation, DonationAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
-admin.site.site_header = "USG Additional Admin Tools Control Panel"
+admin.site.site_header = "BETA - USG Additional Admin Tools Control Panel"
