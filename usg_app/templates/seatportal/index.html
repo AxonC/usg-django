@@ -10,14 +10,21 @@
 <div class="container">
   <div class="col-lg-2"></div>
   <div class="col-lg-8 col-md-8 text-xs-center">
-      <p class="btn-group text-xs-center">
-        <input type="button" class="btn btn-danger" id="republican" value="Republican Seats"></input>
-        <input type="button" class="btn btn-info" id="normal" value="Full List"></input>
-        <input type="button" class="btn btn-primary" id="democratic" value="Democratic Seats"></input>
-      </p><br/>
-      <p class="btn-group text-xs-center">
-        <input type="button" class="btn btn-default" id="vacant" value="Vacant"></input>
-        <button type="button" class="btn btn-default" value="USG Home"><a href="http://usgovsim.net/PRC/" style="color: #000;">USG Home</a></button>
+      <h4>Party Filters:</h4>
+        <p>
+            <input type="button" class="btn btn-danger" id="republican" value="Republican Seats">
+            <input type="button" class="btn btn-info" id="normal" value="Full List">
+            <input type="button" class="btn btn-primary" id="democratic" value="Democratic Seats">
+        </p>
+    <h4>Class Filters:</h4>
+        <p>
+            <input type="button" class="btn btn-info" id="cl1" value="Class I">
+            <input type="button" class="btn btn-info" id="cl2" value="Class II">
+            <input type="button" class="btn btn-info" id="cl3" value="Class III">
+        </p>
+    <h4>Other Filters & Info:</h4>
+    <input type="button" class="btn btn-default" id="vacant" value="Vacant Seats">
+    <button type="button" class="btn btn-default" value="USG Home"><a href="http://usgovsim.net/PRC/" style="color: #000;">USG Home</a></button>
       </p>
       <div class="card">
         {% if count == True %}
