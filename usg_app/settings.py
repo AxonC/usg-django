@@ -46,8 +46,20 @@ INSTALLED_APPS = [
     'polling',
     'localflavor',
     'seatportal',
-]
+    'chartjs',
+    'djrichtextfield',
 
+]
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//tinymce.cachefly.net/4.1/tinymce.min.js'],
+    'init_template': 'djrichtextfield/init/tinymce.js',
+    'settings': {
+        'menubar': False,
+        'plugins': 'link image',
+        'toolbar': 'bold italic | link image | removeformat',
+        'width': 700
+    }
+}
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

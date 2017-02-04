@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^lobbying/', include('lobbying.urls')),
     url(r'^polling/', include('polling.urls')),
     url(r'^seats/', include('seatportal.urls')),
+    url(r'^djrichtextfield/', include('djrichtextfield.urls')),
 ]
