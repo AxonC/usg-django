@@ -1,0 +1,82 @@
+{% extends 'polling/basefiles.html'%}
+{% load static %}
+{% load humanize %} 
+<head>
+  {% block dependencies %}
+  {% endblock %}
+</head>
+
+{% block content %}
+<h1 class="text-xs-center">USG Polling Portal</h1>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">{% include "polling/nav.html" %}</div>
+        <div class="col-md-2"></div>
+    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-xs-center">Welcome!</h2>
+                    <blockquote class="blockquote text-xs-center">
+                      <p class="mb-0">I think there's space in the market for a half-dozen kind of polling analysts.</p>
+                      <footer class="blockquote-footer">Nate Silver</footer>
+                    </blockquote>
+                    <p class="text-xs-center">You have reached the Polling Portal for US Government Simulation.</br> From here, you can access various types of polling which are used during the course of the game. The primary use of this, however, is to see polling trends for local elections in those all important swing seats.</p>
+                    <div class="text-xs-center">
+                        <h4>Browse by Seat:</h4>
+                        {% for nav in navigation %}<a role="button" class="btn btn-primary" style="margin: 3px;" href="seat/{{ nav.state }}">{{ nav.get_state_display}} I Polling</a>{% endfor %}
+                    </div>
+                    <h2 class="text-xs-center">Latest Polling Figures:</h2>
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+                              <th>State:</th>
+                              <th>Democratic:</th>
+                              <th>Republican</th>
+                              <th>Independent:</th>
+                              <th>Margin:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for data in polling %}
+                            <tr>
+                              <td>{{ data.seat.state }}</td>
+                              <td>{{ data.avg_dem }}%</td>
+                              <td> {{ data.avg_gop}}%</td>
+                              <td>{{ data.avg_ind }}%</td>
+                              <td style="{% if "D" in data.pmargin %} background-color: #ddebf7;{% elif "R" in data.pmargin %} background-color: #fce4d6; {% endif %}">{{ data.pmargin }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                        <h2 class="text-xs-center">Chances of Winning a Senate Majority:</h2>
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                    </div>
+                    <script>
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ["Republican", "Democrat"],
+                                datasets: [{
+                                    label: 'Chances of Winning',
+                                    data: [{% for c in chances %} {{ c.chance_gop }}, {{ c.chance_dnc }} {% endfor %}],
+                                    backgroundColor: [
+                                        '#990000',
+                                        '#4a86e8',
+                                    ],
+                                }]
+                            },
+                        });
+                    </script>                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'polling/basefiles.html'%}
+{% load static %}
+{% load humanize %} 
+<head>
+  {% block dependencies %}
+  {% endblock %}
+</head>
+
+{% block content %}
+<h1 class="text-xs-center">USG Polling Portal</h1>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">{% include "polling/nav.html" %}</div>
+        <div class="col-md-2"></div>
+    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-xs-center">Polling for {{ title }}</h2>
+                    <div id="line1" style="width: 610px; height: 400px; margin: 0 auto"></div>
+                      <script type="text/javascript">
+                          google.charts.load('current', {'packages':['line']});
+                          google.charts.setOnLoadCallback(drawChart);
+                    
+                        function drawChart() {
+                          // Define the chart to be drawn.
+                          var data = new google.visualization.DataTable();
+                          data.addColumn('string', 'Polling Series');
+                          data.addColumn('number', 'Democrat');
+                          data.addColumn('number', 'Republican');
+                          data.addColumn('number', 'Independent');
+                          
+                          data.addRows([
+                              {% for d in polling %}
+                            ['{{ d.series}}', {{ d.avg_dem }}, {{ d.avg_gop }}, {{ d.avg_ind }}],{% endfor %}
+                          ]);
+                          var options = {
+                            chart: {
+                              title: '{{ title }}',
+                              curveType: 'function',
+                              legend: { position: 'bottom' },
+                            },
+                          };
+                    
+                          // Instantiate and draw the chart.
+                          var chart = new google.charts.Line(document.getElementById('line1'));
+                          chart.draw(data, options);
+                        }
+                      </script>
+   
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+                              <th>Polling Series/Date:</th>
+                              <th>Democratic:</th>
+                              <th>Republican</th>
+                              <th>Independent:</th>
+                              <th>Margin:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for data in polling %}
+                            <tr>
+                              <th scope="row">{{ data.series }}/{{ data.date }}</th>
+                              <td>{{ data.avg_dem }}%</td>
+                              <td> {{ data.avg_gop}}%</td>
+                              <td>{{ data.avg_ind }}%</td>
+                              <td style="{% if "D" in data.pmargin %} background-color: #ddebf7;{% elif "R" in data.pmargin %} background-color: #fce4d6; {% endif %}">{{ data.pmargin }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </script>
+                    <div>
+                        <h2 class="text-xs-center">Chances of Winning a Senate Majority:</h2>
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                    </div>
+                    <script>
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ["Republican", "Democrat"],
+                                datasets: [{
+                                    label: 'Chances of Winning',
+                                    data: [{% for c in chances %} {{ c.chance_gop }}, {{ c.chance_dnc }} {% endfor %}],
+                                    backgroundColor: [
+                                        '#990000',
+                                        '#4a86e8',
+                                    ],
+                                }]
+                            },
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+    {% for test in t %}
+        {{ test.pmargin }}
+    {% endfor %}
+{% endblock %}
