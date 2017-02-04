@@ -20,8 +20,21 @@ class SenateSeat(models.Model):
     sclass = models.IntegerField("class of Seat", choices=SEAT_CLASS)
     user = models.CharField("username of Player", max_length=30, null=True, blank=True)
     vacant = models.BooleanField("Is the Seat Vacant?", default=False)
+    REGIONS = (
+    ('MW', 'Midwest'),
+    ('NE', 'Northeast'),
+    ('S', 'The South'),
+    ('W', 'The West'),
+    )
+    region = models.CharField("region", choices=REGIONS, max_length=3)
+    swingseat = models.BooleanField("Is seat up for election in the next cycle?", default=False)
     class Meta:
         verbose_name_plural = "Seats"
+    def __str__(self):
+        return "%s, %s" % (self.state, self.sclass)
+    def _get_state(self):
+        return "%s" % (self.state)
+    disp_state = property(_get_state)
     
 class StateDemographics(models.Model):
     state = models.CharField("state", choices=STATE_CHOICES, max_length=2)
